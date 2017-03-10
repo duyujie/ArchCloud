@@ -18,7 +18,7 @@
 
 	<appender name="info-out"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/log/arch-main.log</file>
+		<file>/log/arch-portal.log</file>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>INFO</level>
 		</filter>
@@ -40,7 +40,7 @@
 
 	<appender name="error-out"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/log/arch-main.error.log</file>
+		<file>/log/arch-portal.error.log</file>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>ERROR</level>
 		</filter>
