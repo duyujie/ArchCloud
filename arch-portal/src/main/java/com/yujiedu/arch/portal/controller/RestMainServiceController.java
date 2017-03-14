@@ -1,4 +1,4 @@
-package com.yujiedu.portal.controller.poc;
+package com.yujiedu.arch.portal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

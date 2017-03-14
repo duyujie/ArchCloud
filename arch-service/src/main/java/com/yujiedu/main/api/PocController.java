@@ -1,4 +1,4 @@
-package com.yujiedu.main.controller.poc;
+package com.yujiedu.main.api;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -26,7 +26,6 @@ import com.yujiedu.service.poc.vo.WelcomeInfo;
 public class PocController {
 	@Autowired
 	private IPocService pocService;
-	private static Logger logger = LoggerFactory.getLogger(PocController.class);
 
 	public PocController() {
 	}

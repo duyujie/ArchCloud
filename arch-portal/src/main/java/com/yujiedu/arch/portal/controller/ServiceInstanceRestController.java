@@ -1,4 +1,4 @@
-package com.yujiedu.main.controller.poc;
+package com.yujiedu.arch.portal.controller;
 
 import java.util.List;
 

@@ -18,13 +18,13 @@
 
 	<appender name="info-out"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/log/arch-main-service.log</file>
+		<file>/log/arch-discovery-service.log</file>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>INFO</level>
 		</filter>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>/log/arch-main-service.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/log/arch-discovery-service.%d{yyyy-MM-dd}.log</fileNamePattern>
 
 			<!-- keep 30 days' worth of history capped at 3GB total size -->
 			<maxHistory>30</maxHistory>
@@ -40,13 +40,13 @@
 
 	<appender name="error-out"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/log/arch-main-service.error.log</file>
+		<file>/log/arch-discovery-service.error.log</file>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>ERROR</level>
 		</filter>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>/log/arch-main-service.error.%d{yyyy-MM-dd}.log
+			<fileNamePattern>/log/arch-discovery-service.error.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 
 			<!-- keep 30 days' worth of history capped at 3GB total size -->

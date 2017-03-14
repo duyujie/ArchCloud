@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan({ "com.yujiedu.portal" })
+@ComponentScan({ "com.yujiedu.arch.portal" })
 public class ArchPortalApplication {
 
 	public static void main(String[] args) {
