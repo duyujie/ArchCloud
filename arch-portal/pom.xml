@@ -93,6 +93,12 @@
 			<version>0.1.4</version>
 		</dependency>
 		<!-- logback日志配置结束 -->
+
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>4.0.38</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

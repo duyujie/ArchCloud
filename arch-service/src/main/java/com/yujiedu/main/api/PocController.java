@@ -73,11 +73,5 @@ public class PocController {
 		return pocService.findUsersById(userId);
 	}
 
-	@Value("${foo}")
-	String foo;
 
-	@GetMapping("/foo")
-	public String foo() {
-		return "The foo is: " + foo;
-	}
-}
+} 
