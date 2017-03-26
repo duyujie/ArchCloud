@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<configuration status="off" monitorInterval="1800">
+	<properties>
+		<property name="MODULE_NAME">fireworks-test</property>
+		<property name="LOG_HOME">/log</property>
+	</properties>
+	<appenders>
+		<!-- 定义控制台输出 -->
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</Console>
+		<RollingRandomAccessFile name="InfoLog"
+			fileName="${LOG_HOME}/${MODULE_NAME}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${MODULE_NAME}.%d{yyyyMMdd}.log.gz">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+			<CronTriggeringPolicy schedule="0 0 0 * * ?" />
+			<DefaultRolloverStrategy>
+				<Delete basePath="${LOG_HOME}" maxDepth="2">
+					<IfFileName glob="*/{MODULE_NAME}*.log.gz" />
+					<IfLastModified age="60d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+			<!-- 显示error级别之外的信息 -->
+			<!-- <Filters> -->
+			<!-- <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/> -->
+			<!-- <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/> -->
+			<!-- </Filters> -->
+		</RollingRandomAccessFile>
+		<RollingRandomAccessFile name="ErrorLog"
+			fileName="${LOG_HOME}/${MODULE_NAME}.error.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${MODULE_NAME}.error.%d{yyyyMMdd}.log.gz">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+			<CronTriggeringPolicy schedule="0 0 0 * * ?" />
+			<DefaultRolloverStrategy>
+				<Delete basePath="${LOG_HOME}" maxDepth="2">
+					<IfFileName glob="*/{MODULE_NAME}*.log.gz" />
+					<IfLastModified age="60d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+			<ThresholdFilter level="error" onMatch="ACCEPT"
+				onMismatch="DENY" />
+		</RollingRandomAccessFile>
+	</appenders>
+	<loggers>
+		<root level="DEBUG" includeLocation="true">
+			<appender-ref ref="Console" />
+			<appender-ref ref="InfoLog" />
+			<appender-ref ref="ErrorLog" />
+		</root>
+	</loggers>
+</configuration>
