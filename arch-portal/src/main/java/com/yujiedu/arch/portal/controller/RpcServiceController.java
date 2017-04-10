@@ -3,8 +3,11 @@ package com.yujiedu.arch.portal.controller;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +28,23 @@ class RpcServiceController {
 	@Value("${arch.main.appName}")
 	private String archMainServiceName;
 
-	private IPocService getPocService() {
+	private static final Logger logger = LoggerFactory.getLogger(RpcServiceController.class);
+	private static int callLoop = 0;
 
-		String serviceUri = this.discoveryClient.getInstances(archMainServiceName).get(0).getUri()
-				+ "/remote/pocService";
+	private IPocService getPocService() {
+		List<ServiceInstance> serviceList = this.discoveryClient.getInstances(archMainServiceName);
+		if (serviceList.isEmpty()) {
+			throw new RuntimeException("Not found any server for " + archMainServiceName);
+		}
+
+		int index = callLoop % serviceList.size();
+		if (callLoop == Integer.MAX_VALUE)
+			callLoop = 0;
+		else
+			callLoop++;
+
+		String serviceUri = serviceList.get(index).getUri() + "/remote/pocService";
+		logger.info(archMainServiceName + " uri = " + serviceUri);
 
 		HessianProxyFactory proxyFactory = new HessianProxyFactory();
 		IPocService pocService = null;
