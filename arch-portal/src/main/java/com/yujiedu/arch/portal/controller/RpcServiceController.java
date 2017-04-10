@@ -29,11 +29,11 @@ class RpcServiceController {
 
 		String serviceUri = this.discoveryClient.getInstances(archMainServiceName).get(0).getUri()
 				+ "/remote/pocService";
-		
-		HessianProxyFactory proxyFactory=new HessianProxyFactory();
-		IPocService pocService=null;
+
+		HessianProxyFactory proxyFactory = new HessianProxyFactory();
+		IPocService pocService = null;
 		try {
-			pocService = (IPocService)proxyFactory.create(IPocService.class, serviceUri);
+			pocService = (IPocService) proxyFactory.create(IPocService.class, serviceUri);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -56,6 +56,12 @@ class RpcServiceController {
 	@ResponseBody
 	public List<PocUser> findPocUsersById(@RequestParam("userId") String userId) {
 		return getPocService().findUsersById(userId);
+	}
+
+	@GetMapping(value = "/changeState")
+	@ResponseBody
+	public void changeState() {
+		getPocService().changeState();
 	}
 
 }

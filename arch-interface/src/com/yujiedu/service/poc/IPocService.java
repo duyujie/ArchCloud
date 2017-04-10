@@ -11,4 +11,6 @@ public interface IPocService {
 
 	PocUser findUserById(String userId);
 	List<PocUser> findUsersById(String userId);
+	
+	void changeState();
 }
